@@ -11,6 +11,14 @@
 - The player should have a Wallet and the Wallet should be its own class with remove and add methods (OOP)
 - Player's bankroll goes up and down with wins and losses
 - Ability to move to and from games
+
+
+# Game Setup
+    - Whats your name
+    - how much money to you have
+    - Got to Game choice menu
+# game choice menu
+    - 
  
 
 Bonus Objectives:
