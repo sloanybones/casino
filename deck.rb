@@ -1,3 +1,5 @@
+require_relative "card.rb"
+
 class Deck
  # Getter and Setter methods for rank, suit and color
  attr_accessor :cards
@@ -30,4 +32,10 @@ class Deck
       puts "#{card.rank} #{card.suit} (#{card.color})"
     end
   end
+
+  def random_card
+    card = @cards.sample
+    puts "#{card.rank} #{card.suit} (#{card.color})"
+  end
+
 end

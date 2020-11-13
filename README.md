@@ -13,12 +13,19 @@
 - Ability to move to and from games
 
 
-# Game Setup
+# Game Setup - lobby
     - Whats your name
     - how much money to you have
     - Got to Game choice menu
-# game choice menu
-    - 
+# game choice menu - the lobby
+    - what game do you want to play?
+        - game option 1
+        - game option 2
+        - quit option
+
+# game
+
+
  
 
 Bonus Objectives:
