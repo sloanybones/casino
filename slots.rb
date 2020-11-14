@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-class Slots
-
-    def initialize(w)
-    end
-
-
-def display_game
-end
-
-end
-=======
 require 'colorize'
 require_relative 'wallet.rb'
 require_relative 'menu.rb'
@@ -44,13 +32,7 @@ class Slots
         #display a welcome
         puts "Welcome to the Slot Machine!"
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        puts "How much do you want to play with?"
-        
-        #player's wallet (future have it deduct from overall player wallet currently player's wallet is inaccessible)
-        
-
-        
-
+        puts "You current balance is: #{@wallet.current_balance}"
         grab_bid
     
     end
@@ -68,7 +50,7 @@ class Slots
             @bid = 1
             puts "Placing bid!"
             puts "Good Luck!"
-            new_bal = @player_wallet.subtract_money(1)
+            new_bal = @wallet.subtract_money(1)
             puts "Your Balance: #{new_bal}"
             slot_row #call the slot row
             # check if winner
@@ -77,7 +59,7 @@ class Slots
             @bid = 5
             puts "Placing bid!"
             puts "Good Luck!"
-            new_bal = @player_wallet.subtract_money(5)
+            new_bal = @wallet.subtract_money(5)
             puts "Your Balance: #{new_bal}"
             slot_row #call the slot row
             # check if winner
@@ -86,7 +68,7 @@ class Slots
             @bid = 15
             puts "Placing bid!"
             puts "Good Luck!"
-            new_bal = @player_wallet.subtract_money(15)
+            new_bal = @wallet.subtract_money(15)
             puts "Your Balance: #{new_bal}"
             slot_row #call the slot row
             # check if winner
@@ -168,27 +150,27 @@ class Slots
         if match == 1
             puts "You won!"
             puts "Your balance: "
-            p @player_wallet.add_money(@bid)
+            p @wallet.add_money(@bid)
             go_back
         elsif match == 2
             puts "You won!"
             puts "Your balance: "
-            p @player_wallet.add_money(@bid * 0.5)
+            p @wallet.add_money(@bid * 0.5)
             go_back
         elsif match == 3
             puts "You won!"
             puts "Your balance: "
-            p @player_wallet.add_money(@bid * 2)
+            p @wallet.add_money(@bid * 2)
             go_back
         elsif match == 4
             puts "BIG WIN!!!"
             puts "Your balance: "
-            p @player_wallet.add_money(@bid * 3)
+            p @wallet.add_money(@bid * 3)
             go_back
         else
             puts "Sorry you did not win! :("
             puts "Your balance: "
-            @player_wallet.current_balance
+            @wallet.current_balance
             go_back
         end
     end
@@ -208,4 +190,3 @@ class Slots
 
 end
 
->>>>>>> c616a1915b68b0e69f93afdc5043500b508503ff
