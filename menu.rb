@@ -2,15 +2,17 @@ require_relative 'high_low.rb'
 require_relative 'slots.rb'
 require_relative 'twenty_one.rb'
 require_relative 'dice_game.rb'
+require_relative 'wallet.rb'
 
 class Menu
-  def initialize(menu_title, menu_options, prompt_message)
+  def initialize(menu_title, menu_options, prompt_message, wallet)
     @menu_title = menu_title
     @menu_options = menu_options
     @prompt_message = prompt_message
+    @wallet = wallet
   end
   
-  def display_menu
+  def display_menu()
     puts @menu_title
     @menu_options.each_with_index do |option, index|
       puts "#{index + 1}) #{option}"
@@ -40,16 +42,16 @@ class Menu
   def menu_navigation
     case @validated_user_choice
     when 0
-      slots = Slots.new
-      slots.display_game
+      slots = Slots.new(@wallet)
+      slots.display_game  
     when 1
-      high_low = HighLow.new
+      high_low = HighLow.new(@wallet)
       high_low.display_game
     when 2
-      twenty_one = Twenty_one.new
+      twenty_one = Twenty_one.new(@wallet)
       twenty_one.display_game
     when 3
-      dice_game = Dice_game.new
+      dice_game = Dice_game.new(@wallet)
       dice_game.display_game
     else
       puts "Thanks for playing!"
@@ -66,7 +68,6 @@ class Menu
       # ["Slots", "High Low", "21", "Dice Game", "Exit"]
 
   end
-
-
+ 
 end
 

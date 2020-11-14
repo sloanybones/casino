@@ -1,5 +1,5 @@
 class Wallet
-    #do something
+
     def initialize(money)
         @money = money
     end
@@ -14,6 +14,14 @@ class Wallet
 
     def current_balance
         puts "$#{@money}"
+    end
+    
+    def validate_money(bet)
+        if (@money - bet) >= 0
+            true
+        else
+            false
+        end
     end
     
 end
