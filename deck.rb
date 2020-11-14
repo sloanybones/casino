@@ -2,7 +2,8 @@ require_relative "card.rb"
 
 class Deck
  # Getter and Setter methods for rank, suit and color
- attr_accessor :cards
+ ## Landon Added :ranks and :suits to attr_accessor
+ attr_accessor :cards, :ranks, :suits
 
  # Gets called when you call the new method to create an instance
  # deck = Deck.new
