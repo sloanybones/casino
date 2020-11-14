@@ -1,8 +1,9 @@
 class Dice_game
-  def initialize
+  def initialize(wallet)
     @dice_menu_title = "Welcome to the Dice Game (simplified Craps)!"
     @dice_prompt_message = "What would you like to do?"
     @dice_menu_options = ["Start Playing", "Read Rules", "View Wallet", "Return to Lobby"]
+    @wallet = wallet
   end
   def display_game
     puts @dice_menu_title
