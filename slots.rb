@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-class Slots
-
-    def initialize(w)
-    end
-
-
-def display_game
-end
-
-end
-=======
 require 'colorize'
 require_relative 'wallet.rb'
 require_relative 'menu.rb'
@@ -208,4 +196,3 @@ class Slots
 
 end
 
->>>>>>> c616a1915b68b0e69f93afdc5043500b508503ff

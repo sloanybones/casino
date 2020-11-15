@@ -2,7 +2,6 @@ require_relative 'deck.rb'
 require_relative 'menu.rb'
 require_relative 'wallet.rb'
 
-class HighLow
 
     # place your bet
     # store the bet (deduct from wallet)
@@ -15,9 +14,11 @@ class HighLow
     # money deducted or added from wallet (class)
     # ask user if they want to bet again
     # if yes then loop back to the top else exit go back to menu/lobby
-
+    class HighLow
+    def initialize(wallet)
+        @wallet = wallet
+         end
     
-    attr_accessor :money 
     
     def display_game
         puts "*******  Welcome to High Low!  *******"
@@ -27,7 +28,7 @@ class HighLow
         puts "Make a guess if the follwing dealer draw" 
         puts "will be higher or lower than the first card presented."
         puts "The dealer will then draw a card. If that card corresponds with"
-        puts "your guess, you win. If not, the dealer recieves your bet"
+        puts "your guess, you win. If not, the dealer recieves your bet. Aces are high!"
         puts "-----------------------------------------------------------------"
         make_sure
     end
@@ -45,27 +46,29 @@ class HighLow
     end
     
     def get_bet
-    puts "You current wallet total is:$ #{Wallet.new.money}. Place a bet."
+    puts "You current wallet total is $#{@wallet.current_balance}. Place a bet."
     choice = gets.strip.to_i
-    
-
     show_card_1
     end
-    
+   
+    @cardy = []
     def show_card_1
-    test_deck = Deck.new()
-    puts test_deck.random_card
-    end
-    
-
-
-    def ask
-        puts "Will the next card be higher or lower than" #add card just shown
+        @cardy = []
+        test_deck = Deck.new
+        card = test_deck.random_card
+        @cardy.push(card)
+        @cardy.each do |answer|
+             
+        
+        
+        
+        puts " "
+        puts "Will the next card be higher or lower than #{answer[:rank]} #{answer[:suit]} #{answer[:color]} ?" 
         choice = gets.strip
         if choice == "high"
     end
 end
-        
+
         def show_card_2
         test_deck = Deck.new()
         puts test_deck.random_card
@@ -94,8 +97,7 @@ end
             
             
         end
+    
     end
-    
-    
-
+end
 end
