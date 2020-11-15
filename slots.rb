@@ -58,7 +58,7 @@ class Slots
             self.validate_bid
             puts "Placing bid!"
             puts "Good Luck!\n"
-            new_bal = @wallet.subtract_money(1)
+            new_bal = @wallet.subtract_money(@bid)
             # puts "Your Balance: #{new_bal}"
             slot_row #call the slot row
             # check if winner
@@ -68,7 +68,7 @@ class Slots
             self.validate_bid
             puts "Placing bid!"
             puts "Good Luck!\n"
-            new_bal = @wallet.subtract_money(5)
+            new_bal = @wallet.subtract_money(@bid)
             # puts "Your Balance: #{new_bal}"
             slot_row #call the slot row
             # check if winner
@@ -78,7 +78,7 @@ class Slots
             self.validate_bid
             puts "Placing bid!"
             puts "Good Luck!\n"
-            new_bal = @wallet.subtract_money(15)
+            new_bal = @wallet.subtract_money(@bid)
             # puts "Your Balance: #{new_bal}"
             slot_row #call the slot row
             # check if winner
@@ -192,6 +192,7 @@ class Slots
             self.grab_bid
         elsif input == 'n'
             puts "Going back to main menu"
+            return
         else
             puts "Invalid options try again"
             self.go_back
