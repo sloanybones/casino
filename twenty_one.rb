@@ -25,8 +25,6 @@ require_relative 'deck.rb'
 
 
 
-    get_card
-
 
     # card values Ace = 1 or 11 (players choice), 1-10, J=10, q=10 and k = 10
 
