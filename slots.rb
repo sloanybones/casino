@@ -192,7 +192,7 @@ class Slots
             self.grab_bid
         elsif input == 'n'
             puts "Going back to main menu"
-            return
+            create_menu_object
         else
             puts "Invalid options try again"
             self.go_back
@@ -208,6 +208,11 @@ class Slots
         else
             return
         end
+    end
+
+    def create_menu_object
+        lobby = Menu.new("Casino Games", ["Slots", "High Low", "21", "Dice Game", "Exit"], "Which option would you like to choose?", @wallet)
+        lobby.display_menu
     end
 
 end
