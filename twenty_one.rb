@@ -140,6 +140,8 @@ class Twenty_one
             puts "Dealers visible hand value is #{convert_rank_to_integer_dealer(@dealer_cards[1][:rank])}"
             puts ""
 
+<<<<<<< HEAD
+=======
             @player_card_value = 0
             puts "Players cards are:"
             @player_cards.each do |card|
@@ -151,6 +153,7 @@ class Twenty_one
             puts ""
 
         end
+>>>>>>> ce5864d27d9c934780a7bc3706ef127f51ffb287
 
         def add_dealer_card
             @dealer_cards.push(get_card)
@@ -316,4 +319,13 @@ end
     
 
     #Model view controller
+<<<<<<< HEAD
+
+<<<<<<< HEAD
+ end
+=======
+# end
+>>>>>>> b09246c6381515b9745d0c3905fde9af6142688d
+=======
  
+>>>>>>> ce5864d27d9c934780a7bc3706ef127f51ffb287
