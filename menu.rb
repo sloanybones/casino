@@ -43,7 +43,7 @@ class Menu
     case @validated_user_choice
     when 0
       slots = Slots.new(@wallet)
-      slots.display_game  
+      slots.display_game
     when 1
       high_low = HighLow.new(@wallet)
       high_low.display_game
@@ -62,11 +62,11 @@ class Menu
       else 
         self.display_menu
       end
+      
     end
       
 
       # ["Slots", "High Low", "21", "Dice Game", "Exit"]
-
   end
  
 end

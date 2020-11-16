@@ -14,7 +14,7 @@ class Wallet
 
     def current_balance
         # puts "$#{@money}"
-        return @money
+        @money
     end
 
     def validate_money(bet)
