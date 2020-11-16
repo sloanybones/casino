@@ -19,13 +19,17 @@ class Wallet
 >>>>>>> b09246c6381515b9745d0c3905fde9af6142688d
         @money
     end
-    
+
     def validate_money(bet)
-        if (@money - bet) >= 0
+        if (@money - bet) >= 0 && bet > 0
             true
         else
             false
         end
     end
+<<<<<<< HEAD
     
 end
+=======
+end
+>>>>>>> ce5864d27d9c934780a7bc3706ef127f51ffb287
