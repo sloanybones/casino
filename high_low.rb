@@ -17,7 +17,8 @@ require_relative 'wallet.rb'
     class HighLow
     def initialize(wallet)
         @wallet = wallet
-         end
+        
+    end
     
     
     def display_game
@@ -28,7 +29,8 @@ require_relative 'wallet.rb'
         puts "Make a guess if the follwing dealer draw" 
         puts "will be higher or lower than the first card presented."
         puts "The dealer will then draw a card. If that card corresponds with"
-        puts "your guess, you win. If not, the dealer recieves your bet. Aces are high!"
+        puts "your guess, you win. If not, the dealer recieves your bet unless"
+        puts "they match then you triple your bet! Aces are low!"
         puts "-----------------------------------------------------------------"
         make_sure
     end
@@ -41,63 +43,130 @@ require_relative 'wallet.rb'
             get_bet
         else
             "Sending you back to the lobby"
-            lobby
+           back_to_menu
     end 
     end
     
     def get_bet
-    puts "You current wallet total is $#{@wallet.current_balance}. Place a bet."
-    choice = gets.strip.to_i
-    show_card_1
+        puts "You current wallet total is $#{@wallet.current_balance}. Place a bet."
+        @bet = gets.strip.to_i
+         @wallet.subtract_money(@bet)
+        show_card_1
     end
    
-    @cardy = []
+    
+    
+    
     def show_card_1
-        @cardy = []
+     @cardy = []
+        puts " "
         test_deck = Deck.new
         card = test_deck.random_card
-        @cardy.push(card)
-        @cardy.each do |answer|
-             
-        
-        
-        
+        @cardy << card
+        @cardy.each do |card|
         puts " "
-        puts "Will the next card be higher or lower than #{answer[:rank]} #{answer[:suit]} #{answer[:color]} ?" 
-        choice = gets.strip
-        if choice == "high"
-    end
-end
-
-        def show_card_2
-        test_deck = Deck.new()
-        puts test_deck.random_card
-        if #the guess matches
-            win
-        else
-            lose
-    end
-end
-
+        puts "Will the next card be higher or lower than #{card.rank} #{card.suit} #{card.color}?" 
+        puts " "
+        puts "1) Higher"
+        puts "2) Lower"
+        choice = gets.to_i
+        case choice
+        when 1
+            puts " "
+            @cardy2 = []
+            try = Deck.new()
+            card1 = try.random_card
+            @cardy2 << card1
+            @cardy2.each do |card1|
+            end
+            if card1.rank > card.rank
+                win
+            elsif
+                card1.rank == card.rank
+                equal
+            elsif
+               card1.rank < card.rank
+                lose
+            end
         
-        def win
-            puts "You doubled your bet!"
+    
+        
+            when 2
+            puts " "
+            @cardy3 = []
+            try2 = Deck.new()
+            card2 = try2.random_card
+            @cardy3 << card2
+            @cardy3.each do |card2|
+            end
+            if card2.rank < card.rank
+                win
+            elsif
+                card2.rank == card.rank
+                equal
+            elsif
+                card2.rank > card.rank
+                lose
+            end
+            else
+                "Invalid Choice try again"
+                get_bet
+        
+            end
+        end
+    end
+end
+
+
+  
+       def win
+            puts " "
+            puts "**** WIN! You doubled your bet! ****"
+            puts "$#{@bet * 2}"
+            puts "You current wallet total is $#{@wallet.current_balance}"
+            puts " "
+            self.play_again
+        
+        
         end
 
         def lose
-            "YOU LOST"
-            play_again
+           puts " "
+           puts "YOU LOST"
+           puts "-$#{@bet}"
+           puts "Your wallet total is $#{@wallet.current_balance}"
+           puts " "
+           self.play_again
+        end
+      
+      
+        def equal
+            puts " "
+            puts "It's a match! TIMES 3!"
+            puts "$#{@bet * 3}"
+            puts "You current wallet total is $#{@wallet.current_balance}"
+            puts " "
+            self.play_again
         end
 
+
         def play_again
-            "Want to play again? y/n"
-            user_choice = gets.strip
-            if user_choice == "y"
-            get_bet
+            puts "Do you want to play again? y/n"
+            input = gets.strip
+            if input == 'y'
+                self.get_bet
+            elsif input == 'n'
+                back_to_menu
+            else
+                puts "Invalid options try again"
+                back_to_menu
+            end
+                
             
-            
-        end
+            end
+            def back_to_menu
+              lobby =  Menu.new("Casino Games", ["Slots", "High Low", "21", "Dice Game", "Exit"], "Which option would you like to choose?", @wallet)
+                lobby.display_menu
+            end
     
-    end
-end
-end
+ 
