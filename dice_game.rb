@@ -19,35 +19,29 @@ class Dice_game
     puts "**********************************"
     puts @dice_prompt_message
     @user_choice = gets.strip
-    @user_choice_number = @user_choice.to_i
-    validate_user_choice(@user_choice_number)
+    validate_user_choice(@user_choice.to_i)
   end
 
   def validate_user_choice(user_choice_number)
     if (user_choice_number >= 1 && user_choice_number <= @dice_menu_options.size)
-      # return user_choice_number
-      @validated_user_choice = user_choice_number-1
-      menu_navigation
-
+      menu_navigation(user_choice_number - 1)
     else
       puts "#{@user_choice_number} is not a number corresponding to a valid option."
       ask_user_choice
     end
   end
 
-  def menu_navigation
-    case @validated_user_choice
+  def menu_navigation(validated_user_choice)
+    case validated_user_choice
     when 0
       puts "**********************************"
       place_bet
-      display_game
     when 1
       puts "**********************************"
       view_dice_game_rules
       display_game
     when 2
-      puts "**********************************"
-      puts "You currently have $#{@wallet.current_balance} in your wallet!"
+      wallet_message
       display_game
     when 3
       puts "Thanks for playing!"
@@ -59,7 +53,6 @@ class Dice_game
   end  
 
   def view_dice_game_rules
-    puts "**********************************"
     puts "To win a bet you have to roll a particular winning number."
     puts "If you roll a 2, 3, 4, 10, 11 or 12, you win."
     puts "If you throw a 5, 6, 7, 8 or 9, you lose."
@@ -73,28 +66,24 @@ class Dice_game
     if @wallet.validate_money(@bet)
       puts "You are betting #{@bet}"
       @wallet.subtract_money(@bet)
-      puts "**********************************"
-      puts "Your wallet now has $#{@wallet.current_balance}"
-      puts "**********************************"
+      wallet_message
       start_rolling 
-
     else
       puts "You don't have enough money for that."
+      wallet_message
       display_game
     end
   end
 
   def start_rolling
     player_dice = Dice.new
-    puts "Rolling the dice..."
-    puts "......"
+    puts "Rolling the dice...\n...\n..."
     player_dice.roll
     puts "You rolled the following: "
     player_dice.show_dice
     puts "\n"
     player_dice.show_sum
-    dice_total = player_dice.return_total
-    determine_payout(dice_total)
+    determine_payout(player_dice.return_total)
   end
 
   def determine_payout(dice_total)
@@ -123,27 +112,30 @@ class Dice_game
       @wallet.add_money((@bet * 5) + @bet)
       puts "You won $#{(@bet * 5)}!"
     end
-    puts "**********************************"
-    puts "Your wallet now has $#{@wallet.current_balance}"
-    puts "**********************************"
+    wallet_message
     reset_bet
     ask_to_continue_rolling
   end
 
   def ask_to_continue_rolling
-    puts "1) Yes"
-    puts "2) No"
-    puts "Would you like to keep playing? (Type 1 or 2)"
-    case gets.strip.to_i
-    when 1
+    puts "Would you like to keep playing? (Type 'y' for yes or 'n' for no)"
+    case gets.strip.downcase
+    when "y"
       place_bet
-    when 2
+    when "n"
       display_game
     else
-      puts "That's not a valid choice. (Type 1 or 2)"
+      puts "That's not a valid choice. (Type 'y' for yes or 'n' for no)"
+      self.ask_to_continue_rolling
     end
   end
     
+  def wallet_message
+    puts "**********************************"
+    puts "Your wallet currently has $#{@wallet.current_balance}"
+    puts "**********************************"
+  end
+
   def reset_bet
     @bet = 0
   end
