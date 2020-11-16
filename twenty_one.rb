@@ -23,7 +23,7 @@ class Twenty_one
         if validated == true 
             self.start_the_game
         else
-            puts "Sorry you entered an amount greater than you're current balance, try again!"
+            puts "Sorry you've entered an invalid, try again!"
             self.display_game
         end
     end
@@ -92,16 +92,20 @@ class Twenty_one
             user_choice = gets.strip.to_i
             if user_choice == 2 
                 who_won
-            elsif
-                @dealer_card_value <= 17
+            elsif user_choice == 1
+                if @dealer_card_value <= 17
                     add_dealer_card
                     add_player_card
                     hit_stand(@dealer_card_value,@player_card_value)
                 else
                     add_player_card
                     hit_stand(@dealer_card_value,@player_card_value)
-            
+                end
+            else
+                puts "Please only choose option 1 or 2, please try again."
+                hit_stand(@dealer_card_value,@player_card_value)
             end
+            
         end
     end
 
@@ -130,12 +134,14 @@ class Twenty_one
             @player_cards.push(get_card)
             
             puts ""
+            puts "Dealers cards are:"
             puts "** -- of -----**"
             puts "** #{@dealer_cards[1][:rank]} of #{@dealer_cards[1][:suit]} **"
             puts "Dealers visible hand value is #{convert_rank_to_integer_dealer(@dealer_cards[1][:rank])}"
             puts ""
 
             @player_card_value = 0
+            puts "Players cards are:"
             @player_cards.each do |card|
             puts "** #{card[:rank]} of #{card[:suit]} **"
             sum = convert_rank_to_integer_player(card[:rank])
