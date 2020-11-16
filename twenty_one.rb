@@ -316,13 +316,6 @@ end
     
 
     #Model view controller
-<<<<<<< HEAD
 
-<<<<<<< HEAD
- end
-=======
 # end
->>>>>>> b09246c6381515b9745d0c3905fde9af6142688d
-=======
  
->>>>>>> ce5864d27d9c934780a7bc3706ef127f51ffb287
