@@ -7,6 +7,11 @@ class Dice_game
     @wallet = wallet
   end
   
+  def create_menu_object
+    lobby = Menu.new("Casino Games", ["Slots", "High Low", "21", "Dice Game", "Exit"], "Which option would you like to choose?", @wallet)
+    lobby.display_menu
+  end
+  
   def display_game
     puts @dice_menu_title
     @dice_menu_options.each_with_index do |option, index|
@@ -46,6 +51,7 @@ class Dice_game
     when 3
       puts "Thanks for playing!"
       puts "Returning to lobby..."
+      create_menu_object
     else
       puts "That's not a valid choice"
       display_game
