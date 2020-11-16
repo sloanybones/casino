@@ -13,6 +13,10 @@ class Wallet
     end
 
     def current_balance
+<<<<<<< HEAD
+=======
+        # puts "$#{@money}"
+>>>>>>> b09246c6381515b9745d0c3905fde9af6142688d
         @money
     end
     

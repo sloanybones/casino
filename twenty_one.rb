@@ -1,6 +1,6 @@
 require_relative 'deck.rb'
 
- class Twenty_one
+ #class Twenty_one
 
     # def initialize 
     # end
@@ -51,4 +51,8 @@ require_relative 'deck.rb'
 
     #Model view controller
 
+<<<<<<< HEAD
  end
+=======
+# end
+>>>>>>> b09246c6381515b9745d0c3905fde9af6142688d
