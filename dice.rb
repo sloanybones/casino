@@ -9,7 +9,7 @@ class Dice
     end
       
     def show_dice
-    print "Die1: ", @die1, " Die2:", @die2
+    print "Die1: ", @die1, " Die2: ", @die2
     end
       
     def show_sum
