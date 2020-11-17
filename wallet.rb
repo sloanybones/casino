@@ -13,15 +13,15 @@ class Wallet
     end
 
     def current_balance
-        return @money
+        # puts "$#{@money}"
+        @money
     end
-    
+
     def validate_money(bet)
-        if (@money - bet) >= 0
+        if (@money - bet) >= 0 && bet > 0
             true
         else
             false
         end
     end
-    
 end

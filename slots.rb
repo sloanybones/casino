@@ -17,28 +17,28 @@ class Slots
         @wallet = wallet
 
         #array to hold the characters for slot machine
-        @slot_char = ['!'.colorize(:light_red), 
-        '@'.colorize(:light_green), 
+        @slot_char = ['!'.colorize(:red), 
+        '@'.colorize(:green), 
         '#'.colorize(:yellow), 
         '$'.colorize(:magenta), 
         '%'.colorize(:cyan), 
-        '^'.colorize(:light_magenta), 
-        '&'.colorize(:light_yellow),
-        '*'.colorize(:red)]
+        '^'.colorize(:blue), 
+        '&',
+        '*'.colorize(:white)]
 
 
     end
     def display_game
         #display a welcome
-        puts "Welcome to the Slot Machine!"
-        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        puts "How much do you want to play with?"
-        
-        #player's wallet (future have it deduct from overall player wallet currently player's wallet is inaccessible)
-        
-
-        
-
+        welcome_message = "Welcome to the Slot Machine!"
+        border = welcome_message.gsub(/\s|\S/, '~').colorize(:yellow)
+        rules = "Rules: \n. Place a bet\n- bid 1 = $1 \n- bid 5 = $5 \n- big max = $15\n"
+        puts border
+        puts welcome_message.colorize(:magenta)
+        puts border
+        puts rules.colorize(:light_white)
+        puts "You current balance is: #{@wallet.current_balance}".colorize(:light_cyan)
+        puts " "
         grab_bid
     
     end
@@ -50,32 +50,36 @@ class Slots
         puts "3. Bid Max" #$15
         choice = gets.strip.to_i
 
+        
         #subtract bid from player_wallet
         case choice
         when 1
             @bid = 1
+            self.validate_bid
             puts "Placing bid!"
-            puts "Good Luck!"
-            new_bal = @player_wallet.subtract_money(1)
-            puts "Your Balance: #{new_bal}"
+            puts "Good Luck!\n"
+            new_bal = @wallet.subtract_money(@bid)
+            # puts "Your Balance: #{new_bal}"
             slot_row #call the slot row
             # check if winner
             winner_check
         when 2
             @bid = 5
+            self.validate_bid
             puts "Placing bid!"
-            puts "Good Luck!"
-            new_bal = @player_wallet.subtract_money(5)
-            puts "Your Balance: #{new_bal}"
+            puts "Good Luck!\n"
+            new_bal = @wallet.subtract_money(@bid)
+            # puts "Your Balance: #{new_bal}"
             slot_row #call the slot row
             # check if winner
             winner_check
         when 3
             @bid = 15
+            self.validate_bid
             puts "Placing bid!"
-            puts "Good Luck!"
-            new_bal = @player_wallet.subtract_money(15)
-            puts "Your Balance: #{new_bal}"
+            puts "Good Luck!\n"
+            new_bal = @wallet.subtract_money(@bid)
+            # puts "Your Balance: #{new_bal}"
             slot_row #call the slot row
             # check if winner
             winner_check
@@ -151,46 +155,58 @@ class Slots
                     match += 1
                 end
             end
-            p "how many matches you got: #{match}"
-    
+            # p(match)
         if match == 1
             puts "You won!"
-            puts "Your balance: "
-            p @player_wallet.add_money(@bid)
-            go_back
+            puts "Your balance: $#{@wallet.add_money(@bid + @bid)}"
+            self.go_back
         elsif match == 2
             puts "You won!"
-            puts "Your balance: "
-            p @player_wallet.add_money(@bid * 0.5)
-            go_back
+            puts "Your balance: $#{@wallet.add_money(@bid + @bid * 0.5)}"
+            self.go_back
         elsif match == 3
             puts "You won!"
-            puts "Your balance: "
-            p @player_wallet.add_money(@bid * 2)
-            go_back
+            puts "Your balance: $#{@wallet.add_money(@bid + @bid * 2)}"
+            self.go_back
         elsif match == 4
             puts "BIG WIN!!!"
-            puts "Your balance: "
-            p @player_wallet.add_money(@bid * 3)
-            go_back
+            puts "Your balance: $#{@wallet.add_money(@bid + @bid * 3)}"
+            self.go_back
         else
             puts "Sorry you did not win! :("
-            puts "Your balance: "
-            @player_wallet.current_balance
-            go_back
+            puts "Your balance: $#{@wallet.current_balance}"
+            self.go_back
         end
     end
 
     def go_back
+        if @wallet.current_balance == 0
+            puts "\nI'm sorry but you do not have enough money to play the slot machine.".colorize(:red)
+            puts "Returning you to the main menu".colorize(:red)
+            return
+        end
         puts "Do you want to play again? y/n"
         input = gets.strip
+        
         if input == 'y'
             self.grab_bid
         elsif input == 'n'
+            puts "Going back to main menu"
             return
         else
             puts "Invalid options try again"
             self.go_back
+        end
+    end
+
+    def validate_bid
+        #validate bid
+        if @wallet.validate_money(@bid) == false
+            puts "I'm sorry but you do not have enough money to bid this amount."
+            puts "Your balance in your wallet is #{@wallet.current_balance}"
+            self.grab_bid
+        else
+            return
         end
     end
 
